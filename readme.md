@@ -1,2 +1,1 @@
-coming soon
-
+Learn to fuzzing

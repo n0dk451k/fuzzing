@@ -1,0 +1,35 @@
+<DataModel name="HelloWorld">
+  <String value="Hello world!" />
+</DataModel>
+
+<DataModel name="ParentModel">
+  <String value="Hello " />
+</DataModel>
+
+<DataModel name="HelloWorldModel" ref="ParentModel" >
+  <String value=" world!" />
+</DataModel>
+
+<DataModel name="Template">
+  <String name="Key" />
+  <String value=": " token="true" />
+  <String name="Value" />
+  <String value="\r\n" token="true" />
+</DataModel>
+
+<DataModel name="Customized" ref="Template">
+  <String name="Key" value="Content-Length" />
+  <String name="Value">
+    <Relation type="size" of="HttpBody" />
+  </String>
+  <Blob name="HttpBody" />
+</DataModel>
+
+<DataModel name="Customized1" ref="Template">
+  <String name="Key" value="Content-Length" />
+  <String value=": " token="true" />
+  <String name="Value">
+    <Relation type="size" of="HttpBody" />
+  </String>
+  <String value="\r\n" token="true" />
+</DataModel>

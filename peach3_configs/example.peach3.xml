@@ -1,0 +1,67 @@
+<Include ns="DataModels" src="file:datamodels/basic.peach3.xml" />
+
+<!--
+<DataModel name="NewDataModel" ref="foo:TheDataModel">
+</DataModel>
+
+<PythonPath path="/usr/bin/python3">
+
+<Import import="MyCode" />
+
+<StateModel name="TheStateModel" initialState="InitialState">
+        <State name="InitialState">
+
+                <!- - Write out the contents of file.  The publisher attribute matches
+                the name provided for the publisher in the Test section. - ->
+                <Action type="output">
+                        <DataModel ref="TestTemplate" />
+                </Action>
+
+                <!- - Close the file - ->
+                <Action type="close" />
+
+                <!- - Launch the file consumer - ->
+                <Action type="call" method="ScoobySnacks" publisher="Peach.Agent"/>
+
+        </State>
+</StateModel>
+
+-->
+
+<StateModel name="TheStateModel" initialState="InitialState">
+        <State name="InitialState">
+
+                <!-- Peach will automatically connect to the remote host -->
+
+                <!-- Send data -->
+                <Action type="output">
+                        <DataModel ref="PacketModel1" />
+                </Action>
+
+                <!-- Receive response -->
+                <Action type="input">
+                        <DataModel ref="PacketModel2" />
+                </Action>
+
+                <!-- Send data -->
+                <Action type="output">
+                        <DataModel ref="PacketModel3" />
+                </Action>
+
+                <!-- Receive response -->
+                <Action type="input">
+                        <DataModel ref="PacketModel4" />
+                </Action>
+        </State>
+</StateModel>
+
+<Test name="Default">
+        <StateModel ref="TheStateModel"/>
+
+        <Publisher class="TcpClient">
+                <Param name="Host" value="127.0.0.1" />
+                <Param name="Port" value="4242" />
+        </Publisher>
+</Test>
+
+

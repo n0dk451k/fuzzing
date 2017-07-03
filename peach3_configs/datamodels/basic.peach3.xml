@@ -33,3 +33,53 @@
   </String>
   <String value="\r\n" token="true" />
 </DataModel>
+
+
+
+
+
+
+
+<DataModel name="SimpleTypes">
+    <Blob name="var0" valueType="hex" value="AA BB CC DD" />
+    
+    <Block name="DataDef">
+        <Number name="Type"  size="8" value="4"/>
+        <Number name="Data" size="8" value="32"/>
+    </Block>
+    
+    <Choice name="ChoiceBlock">
+        <Blob name="var1" valueType="hex" value="DD BB CC AA" />
+        <Blob name="var2" valueType="hex" value="AA BB DD CC" />
+        <Blob name="var3" valueType="hex" value="BB AA CC DD" />
+    </Choice>
+    
+    <Flags name="options" size="16">
+        <Flag name="compression" position="0" size="1" />
+        <Flag name="compressionType" position="1" size="3" />
+        <Flag name="opcode" position="10" size="2" value="5" />
+    </Flags>
+    
+    <Number name="int64" value="0" size="64"/>
+    <Number name="int32" value="0" size="32"/>
+    <Number name="int16" value="0" size="16"/>
+    <Number name="int8" value="0" size="8"/>
+    
+    <Padding aligned="true"/>
+    
+    <String value="Hello World!" />
+    <String value="Null terminated string" nullTerminated="true" />
+
+    <XmlElement name="example" elementName="Foo">
+    <XmlAttribute attributeName="Bar">
+        <String value="My Attribute!" />
+        </XmlAttribute>
+    </XmlElement>
+    <Foo Bar="My Attribute!"/>
+
+    <XmlElement name="example1" elementName="Foo1">
+        <XmlElement elementName="Bar">
+        <String value="Hello World!" />
+    </XmlElement>
+    <Foo1><Bar>Hello World!</Bar></Foo1>
+</DataModel>

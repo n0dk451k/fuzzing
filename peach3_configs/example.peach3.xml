@@ -1,9 +1,9 @@
 <Include ns="DataModels" src="file:datamodels/basic.peach3.xml" />
 
-<!--
-<DataModel name="NewDataModel" ref="foo:TheDataModel">
+<DataModel name="TheDataModel" ref="foo:SympleTypes">
 </DataModel>
 
+<!--
 <PythonPath path="/usr/bin/python3">
 
 <Import import="MyCode" />

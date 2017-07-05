@@ -8,10 +8,7 @@
         <!--    <Include ns="DataModels" src="file:datamodels/basic.peach3.xml" />  -->
         
         <DataModel name="TheDataModel"> <!-- ref="SympleTypes"> -->
-                <Number name="int64_var1" value="0" size="64"/>
-                <Number name="int64_var2" value="0" size="64"/>
-                <Number name="int64_var3" value="0" size="64"/>
-                <Number name="int64_var4" value="0" size="64"/>
+                <Blob name="var1" value="0x0000000000000000ADDEEFBE0000000000000000000000000000000000000000000" valueType="hex"/>
         </DataModel>
         
         <!--
@@ -70,8 +67,8 @@
                 <StateModel ref="TheStateModel"/>
         
                 <Publisher class="TcpClient">
-                        <Param name="Host" value="127.0.0.1" />
-                        <Param name="Port" value="4242" />
+                        <Param name="Host" value="172.16.72.138" />
+                        <Param name="Port" value="1108" />
                 </Publisher>
         </Test>
         

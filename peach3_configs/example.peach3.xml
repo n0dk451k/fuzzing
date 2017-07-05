@@ -8,7 +8,7 @@
         <!--    <Include ns="DataModels" src="file:datamodels/basic.peach3.xml" />  -->
         
         <DataModel name="TheDataModel"> <!-- ref="SympleTypes"> -->
-                <Blob name="var1" value="0x0000000000000000ADDEEFBE0000000000000000000000000000000000000000000" valueType="hex"/>
+                <Blob name="var1" value="0x0000DEADBABA0000" valueType="hex"/>
         </DataModel>
         
         <!--
@@ -52,14 +52,14 @@
                         </Action>
         
                         <!-- Send data -->
-                        <Action type="output">
+                        <!--<Action type="output">
                                 <DataModel ref="TheDataModel" />
-                        </Action>
+                        </Action>-->
         
                         <!-- Receive response -->
-                        <Action type="input">
+                        <!--<Action type="input">
                                 <DataModel ref="TheDataModel" />
-                        </Action>
+                        </Action>-->
                 </State>
         </StateModel>
         
@@ -68,7 +68,7 @@
         
                 <Publisher class="TcpClient">
                         <Param name="Host" value="172.16.72.138" />
-                        <Param name="Port" value="1108" />
+                        <Param name="Port" value="502" />
                 </Publisher>
         </Test>
         

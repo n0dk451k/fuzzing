@@ -7,10 +7,18 @@
 
         <!--    <Include ns="DataModels" src="file:datamodels/basic.peach3.xml" />  -->
         
-        <DataModel name="TheDataModel"> <!-- ref="SympleTypes"> -->
-                <Blob name="var1" value="0x0000DEADBABA0000" valueType="hex"/>
+        <DataModel name="modbus_model"> <!-- ref="SympleTypes"> -->
+                <!-- .000 0011 = Function Code: Read Holding Registers (3) -->
+                <Blob name="var1" value="0x00d3000000050103020000" valueType="hex"/>
         </DataModel>
-        
+
+        <DataModel name="modbus_model1"> <!-- ref="SympleTypes"> -->
+            <Number size="4" signed="false">
+                <Relation type="size" of="TheValue" />
+            </Number>
+            <Blob name="TheValue" valueType="hex" />
+        </DataModel>
+
         <!--
         <PythonPath path="/usr/bin/python3">
         
@@ -43,12 +51,12 @@
         
                         <!-- Send data -->
                         <Action type="output">
-                                <DataModel ref="TheDataModel" />
+                                <DataModel ref="modbus_model" />
                         </Action>
         
                         <!-- Receive response -->
                         <Action type="input">
-                                <DataModel ref="TheDataModel" />
+                                <DataModel ref="modbus_model1" />
                         </Action>
         
                         <!-- Send data -->
@@ -67,8 +75,8 @@
                 <StateModel ref="TheStateModel"/>
         
                 <Publisher class="TcpClient">
-                        <Param name="Host" value="172.16.72.138" />
-                        <Param name="Port" value="502" />
+                        <Param name="Host" value="172.16.51.144" />
+                        <Param name="Port" value="80" />
                 </Publisher>
         </Test>
         

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Peach version="1.0"
+       author="n0dk451k"
+       description="example"
+       documentation="todo">
+        <!--    <Include ns="DataModels" src="file:datamodels/basic.peach3.xml" />  -->
+        <DataModel name="S7_write_var"> <!-- ref="SympleTypes"> -->
+                <Blob name="TPKT" value="03000024" valueType="hex" mutable="false"/>
+                <Blob name="COTP" value="02f080" valueType="hex" mutable="false"/>
+                <Blob name="S7_Header" value="320100001400000e0005" valueType="hex" mutable="false"/>
+                <Blob name="S7_Parameter" value="0501120a10010001" valueType="hex" mutable="false"/>
+                    <Blob name="S7_Parameter_DB_number" value="0003" valueType="hex"/>
+                    <Blob name="S7_Parameter_Area" value="84" valueType="hex"/>
+                    <Blob name="S7_Parameter_Address" value="00000c" valueType="hex"/>
+                <Blob name="S7_Data_Item" value="0030001" valueType="hex" mutable="false"/>
+                    <Blob name="S7_Data_ItemVal" value="01" valueType="hex"/>
+        </DataModel>
+
+        <DataModel name="COTP_Setup_Comm">
+            <Blob name="TPKT" value="03000016" valueType="hex" mutable="false"/>
+            <Blob name="COTP" value="11e00000001400c1020100c2020102c0010a" valueType="hex" mutable="false"/>
+        </DataModel>
+
+        <DataModel name="Some_Response">
+            <Padding/>
+        </DataModel>
+
+        <DataModel name="S7_Setup_Comm">
+            <Blob name="TPKT" value="03000019" valueType="hex" mutable="false"/>
+            <Blob name="COTP" value="02f080" valueType="hex" mutable="false"/>
+            <Blob name="S7_Header" value="32010000020000080000" valueType="hex" mutable="false"/>
+            <Blob name="S7_Parameter" value="f0000002000201e0" valueType="hex" mutable="false"/>
+        </DataModel>
+
+        <DataModel name="S7_Stop_PLC">
+            <Blob name="TPKT" value="03000021" valueType="hex" mutable="false"/>
+            <Blob name="COTP" value="02f080" valueType="hex" mutable="false"/>
+            <Blob name="S7_Header" value="32010800120000100000" valueType="hex" mutable="false"/>
+            <Blob name="S7_Parameter" value="29000000000009505f50524f4752414d" valueType="hex" mutable="false"/>
+        </DataModel>
+        
+        <StateModel name="TheStateModel" initialState="InitialState">
+                <State name="InitialState">
+                        <!-- Peach will automatically connect to the remote host -->
+        
+                        <Action type="output">
+                                <DataModel ref="COTP_Setup_Comm" />
+                        </Action>
+                        <Action type="input">
+                                <DataModel ref="Some_Response" />
+                        </Action>
+                        <Action type="output">
+                                <DataModel ref="S7_Setup_Comm" />
+                        </Action>
+                        <Action type="input">
+                                <DataModel ref="Some_Response" />
+                        </Action>
+                        <Action type="output">
+                                <DataModel ref="S7_write_var" />
+                        </Action>
+                        <Action type="input">
+                                <DataModel ref="Some_Response" />
+                        </Action>
+      
+                </State>
+        </StateModel>
+        
+        <Test name="Default">
+                <StateModel ref="TheStateModel"/>
+        
+                <Publisher class="TcpClient">
+                        <Param name="Host" value="192.168.0.212" />
+                        <Param name="Port" value="102" />
+                </Publisher>
+        </Test>
+        
+</Peach>
